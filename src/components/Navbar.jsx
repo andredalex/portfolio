@@ -56,7 +56,7 @@ const Navbar = ({ onScrollToProjects, onScrollToContact }) => {
               }
             }}
           >
-            Contattamii
+            Contattami
           </Button>
         </Box>
       </Toolbar>
