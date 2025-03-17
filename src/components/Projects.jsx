@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -30,7 +31,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Quicksand", sans-serif'
+    fontFamily: '"Quicksand", sans-serif',
   },
   components: {
     MuiCssBaseline: {
@@ -46,33 +47,39 @@ const theme = createTheme({
   },
 });
 
-// Card component separated to properly use hooks
+// Card component con navigazione
 const ProgettoCard = ({ progetto, scrollDirection }) => {
+  const navigate = useNavigate();
   const cardRef = React.useRef(null);
   const isInView = useInView(cardRef, { once: false, amount: 0.3 });
-  
+
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      x: scrollDirection === "down" ? -100 : 100 
+    hidden: {
+      opacity: 0,
+      x: scrollDirection === "down" ? -100 : 100,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
-      transition: { 
-        duration: 0.6, 
-        ease: "easeOut" 
-      }
-    }
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
   };
-  
+
+  const handleClick = () => {
+    navigate(`/progetto/${progetto.id}`); // Naviga alla pagina del progetto
+  };
+
   return (
     <motion.div
       ref={cardRef}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={cardVariants}
-      style={{ width: "30%", minWidth: "300px" }}
+      style={{ width: "30%", minWidth: "300px", cursor: "pointer" }}
+      onClick={handleClick}
     >
       <Card
         sx={{
@@ -85,7 +92,6 @@ const ProgettoCard = ({ progetto, scrollDirection }) => {
             boxShadow: "0px 6px 15px rgba(33, 150, 243, 0.3)",
           },
           width: "100%",
-          minWidth: 0,
           height: "250px",
           display: "flex",
           flexDirection: "column",
@@ -138,36 +144,29 @@ const ProgettoCard = ({ progetto, scrollDirection }) => {
 const ProgettiSection = forwardRef((props, ref) => {
   const progetti = [
     {
+      id: 1,
       titolo: "E-Commerce Platform",
-      descrizione:
-        "Piattaforma di e-commerce completa con gestione prodotti, carrello e pagamenti integrati.",
-      tecnologie: ["Python", "Postgres", "SQL", "HTML", "CSS", "JavaScript"],
+      descrizione: "Piattaforma di e-commerce con gestione prodotti e pagamenti.",
+      tecnologie: ["React", "Node.js", "MongoDB", "Stripe API"],
     },
     {
-      titolo: "Applicazione ecodriving",
-      descrizione:
-        "Applicazione per gestire il consumo ed emissione di CO2 durante la guida.",
-      tecnologie: ["Java", "XML", "NoSQL", "Android SDK", "Google Maps API"],
+      id: 2,
+      titolo: "Applicazione Ecodriving",
+      descrizione: "App per monitorare il consumo ed emissione di CO2 nella guida.",
+      tecnologie: ["Java", "Android SDK", "Google Maps API"],
     },
   ];
 
-  // Stato per monitorare la direzione dello scroll
   const [scrollDirection, setScrollDirection] = useState("down");
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Funzione per determinare la direzione dello scroll
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-    if (currentScrollY > lastScrollY) {
-      setScrollDirection("down");
-    } else {
-      setScrollDirection("up");
-    }
-    setLastScrollY(currentScrollY);
-  };
-
-  // Aggiungi event listener per lo scroll
   useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollDirection(currentScrollY > lastScrollY ? "down" : "up");
+      setLastScrollY(currentScrollY);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
@@ -207,17 +206,12 @@ const ProgettiSection = forwardRef((props, ref) => {
               flexWrap: "wrap",
               padding: 4,
               width: "100%",
-              maxWidth: "100%",
               boxSizing: "border-box",
               gap: 4,
             }}
           >
             {progetti.map((progetto, index) => (
-              <ProgettoCard 
-                key={index} 
-                progetto={progetto} 
-                scrollDirection={scrollDirection}
-              />
+              <ProgettoCard key={index} progetto={progetto} scrollDirection={scrollDirection} />
             ))}
           </Box>
 

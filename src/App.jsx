@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
-import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Presentation from "./components/Presentation";
-import Projects from "./components/Projects";
-import { app } from "./firebaseConfig"; // Importa Firebaseù
+import ProgettiSection from "./components/Projects";
+import ProjectDetails from "./components/ProjectDetail";
 
 function App() {
-  const progettiRef = useRef(null);
   return (
-    <>
-      <Navbar />
-      <Presentation progettiRef={progettiRef}/>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Presentation />} />
+        <Route path="/progetto/:id" element={<ProjectDetails />} />
+      </Routes>
+    </Router>
   );
 }
 

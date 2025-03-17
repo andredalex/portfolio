@@ -27,8 +27,6 @@ const Navbar = ({ onScrollToProjects, onScrollToContact }) => {
             variant="text"
             onClick={onScrollToProjects}
             sx={{
-              borderColor: 'primary.main',
-              border: 1,
               color: 'primary.main',
               textTransform: 'none',
               fontWeight: 400,
@@ -45,8 +43,6 @@ const Navbar = ({ onScrollToProjects, onScrollToContact }) => {
             variant="text"
             onClick={onScrollToContact}
             sx={{
-              borderColor: 'primary.main',
-              border: 1,
               color: 'primary.main',
               textTransform: 'none',
               fontWeight: 400,
