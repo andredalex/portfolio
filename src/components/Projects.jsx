@@ -147,7 +147,7 @@ const ProgettiSection = forwardRef((props, ref) => {
       id: 1,
       titolo: "E-Commerce Platform",
       descrizione: "Piattaforma di e-commerce con gestione prodotti e pagamenti.",
-      tecnologie: ["React", "Node.js", "MongoDB", "Stripe API"],
+      tecnologie: ["HTML", "CSS", "Python", "POstgreSQL", "SQLAlchemy"],
     },
     {
       id: 2,
