@@ -161,7 +161,6 @@ const ProjectDetail = () => {
               lineHeight: 1.8,
               color: "secondary.main",
               textAlign: { xs: "center", md: "left" },
-              color: "text.secondary" 
             }}
           >
             {project.description}
