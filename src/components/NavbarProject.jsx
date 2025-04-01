@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, IconButton } from "@mui/material"; // Aggiunto IconButton
+import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -11,9 +11,8 @@ const NavbarProject = () => {
       position="fixed"
       color="transparent"
       elevation={0}
-      sx={{
-        backdropFilter: "blur(8px)",
-        backgroundColor: "rgba(0, 0, 0, 0.6)", // Sfondo semi-trasparente per leggibilità
+      sx={{ 
+        backdropFilter: "blur(8px)", 
       }}
     >
       <Toolbar>
@@ -24,7 +23,16 @@ const NavbarProject = () => {
         >
           <ArrowBackIcon />
         </IconButton>
-        <Typography variant="h6" color="primary">
+        
+        <Typography
+          variant="h6"
+          sx={{
+            flexGrow: 1,
+            fontWeight: "bold",
+            color: "primary.main",
+            fontFamily: "Quicksand, sans-serif"
+          }}
+        >
           Progetto
         </Typography>
       </Toolbar>

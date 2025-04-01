@@ -8,20 +8,31 @@ import {
   ThemeProvider,
   createTheme,
   CssBaseline,
-  IconButton,
-  Toolbar,
+  Skeleton,
+  Grow,
+  Fade,
+  Divider,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { keyframes } from "@emotion/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
+import CodeIcon from "@mui/icons-material/Code";
 import NavbarProject from "./NavbarProject";
+import AppImage1 from "../assets/immagine1.jpg";
+import AppImage2 from "../assets/immagine2.jpg";
 
-// Tema semplificato
+const gradientAnimation = keyframes`
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+`;
+
 const theme = createTheme({
   palette: {
-    mode: "dark",
-    background: { default: "#121212" },
-    primary: { main: "#2196F3" },
+    mode: 'dark',
+    background: { default: '#121212' },
+    primary: { main: '#2196F3' },
+    text: { primary: '#FFFFFF', secondary: '#B0B0B0' }
   },
   typography: { fontFamily: '"Quicksand", sans-serif' },
 });
@@ -32,16 +43,14 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Dati progetto
   const projectsData = [
     {
       id: 1,
       title: "App E-commerce",
       description:
         "App e-commerce completa con React e Node.js. Integrazione con sistemi di pagamento, gestione del carrello e profili utente personalizzati.",
-      image:
-        "https://via.placeholder.com/1200x600/1e1e1e/2196F3?text=App+E-commerce",
-      technologies: ["HTML", "CSS", "Python", "POstgreSQL", "SQLAlchemy"],
+      image: "/assets/ecommerce-app.jpg",
+      technologies: ["HTML", "CSS", "Python", "PostgreSQL", "SQLAlchemy"],
       githubUrl: "https://github.com/username/project1",
       liveUrl: "https://project1.example.com",
     },
@@ -50,8 +59,7 @@ const ProjectDetail = () => {
       title: "Dashboard Analytics",
       description:
         "Dashboard interattiva per analytics. Visualizzazioni di dati complessi con grafici interattivi e filtri personalizzabili.",
-      image:
-        "https://via.placeholder.com/1200x600/1e1e1e/2196F3?text=Dashboard+Analytics",
+      image: "/assets/analytics-dashboard.jpg",
       technologies: ["React", "D3.js", "Firebase", "Material-UI", "Redux"],
       githubUrl: "https://github.com/username/project2",
       liveUrl: "https://project2.example.com",
@@ -79,29 +87,10 @@ const ProjectDetail = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
+            minHeight: "100vh",
           }}
         >
-          <Typography>Caricamento...</Typography>
-        </Box>
-      </ThemeProvider>
-    );
-  }
-
-  if (!project) {
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Box sx={{ textAlign: "center", py: 5 }}>
-          <Typography variant="h5">Progetto non trovato</Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/")}
-            sx={{ mt: 2 }}
-          >
-            Torna alla Home
-          </Button>
+          <Skeleton variant="rectangular" width={800} height={400} />
         </Box>
       </ThemeProvider>
     );
@@ -113,108 +102,129 @@ const ProjectDetail = () => {
       <NavbarProject />
       <Box
         sx={{
-          minHeight: "100vh",
-          minWidth: "100vw",
           display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          px: 3,
-          py: 2,
-          mt: 8, // Aggiunto per evitare sovrapposizione della navbar
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100vw",
+          height: "calc(100vh - 64px)",
+          padding: 4,
+          backgroundColor: "default",
+          marginTop: "64px",
+          overflowX: "hidden",
         }}
       >
-        {/* Immagine del progetto */}
-        <Box
-          component="img"
-          src={project.image}
-          alt={project.title}
-          sx={{
-            width: "100%",
-            height: "auto",
-            maxHeight: "400px",
-            objectFit: "cover",
-            mb: 3,
-            borderRadius: 1,
-          }}
-        />
-
-        {/* Info progetto */}
-        <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
-          {project.title}
-        </Typography>
-
-        {/* Tecnologie */}
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 3 }}>
-          {project.technologies.map((tech, index) => (
-            <Chip
-              key={index}
-              label={tech}
-              color="primary"
-              size="small"
-              variant="outlined"
-            />
-          ))}
-        </Box>
-
-        {/* Descrizione */}
-        <Typography sx={{ mb: 4 }}>{project.description}</Typography>
-
-        {/* Dettagli */}
-        <Typography sx={{ mb: 4 }}>
-          Questo progetto dimostra l'uso di tecnologie moderne per creare
-          un'applicazione web funzionale e reattiva.
-        </Typography>
-
-        {/* Pulsanti */}
-        <Box
-          sx={{
-            display: "flex",
-            gap: 2,
-            mt: "auto",
-            mb: 4,
-            flexWrap: { xs: "wrap", sm: "nowrap" },
-          }}
-        >
-          {project.githubUrl && (
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<GitHubIcon />}
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              fullWidth
-            >
-              GitHub
-            </Button>
-          )}
-          {project.liveUrl && (
-            <Button
-              variant="outlined"
-              color="primary"
-              startIcon={<LaunchIcon />}
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              fullWidth
-            >
-              Demo
-            </Button>
-          )}
-        </Box>
-
-        {/* Footer semplificato */}
-        <Box
-          sx={{
-            py: 2,
-            mt: "auto",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} Il mio Portfolio
+        {/* Sezione Testo */}
+        <Box sx={{ width: "50%", color: "white" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              mb: 3,
+              background: "linear-gradient(-45deg, #64FFDA, #2196F3)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              animation: `${gradientAnimation} 5s ease infinite`,
+              backgroundSize: "200% 200%",
+            }}
+          >
+            {project.title}
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 1.5,
+              mb: 4,
+              justifyContent: "left",
+            }}
+          >
+            {project.technologies.map((tech, index) => (
+              <Grow in key={index} timeout={index * 200}>
+                <Chip
+                  label={tech}
+                  sx={{
+                    bgcolor: "rgba(100, 255, 218, 0.1)",
+                    color: "#64FFDA",
+                    border: "1px solid rgba(100, 255, 218, 0.3)",
+                    fontWeight: 600,
+                    py: 1,
+                    "& .MuiChip-label": { px: 1.5 },
+                  }}
+                />
+              </Grow>
+            ))}
+          </Box>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: "1.1rem",
+              lineHeight: 1.8,
+              color: "secondary.main",
+              textAlign: { xs: "center", md: "left" },
+              color: "text.secondary" 
+            }}
+          >
+            {project.description}
+            <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }} />
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <CodeIcon sx={{ fontSize: 40, color: "primary.main" }} />
+              <Typography variant="body2" sx={{ fontStyle: "italic", color: "text.secondary" }}>
+                Principali funzionalità: Integrazione API, Design responsive,
+                Autenticazione JWT, Database relazionale
+              </Typography>
+              <Box
+                sx={{
+                  bgcolor: "rgba(17, 34, 51, 0.3)",
+                  p: 3,
+                  borderRadius: 3,
+                  height: "fit-content",
+                  border: "1px solid rgba(100, 255, 218, 0.1)",
+                  width: "100%",
+                  maxWidth: 300,
+                  mx: "auto",
+                }}
+              >
+                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                  Dettagli progetto
+                </Typography>
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
+                >
+                  <Typography variant="body2">
+                    <strong>Stack:</strong> Full-stack
+                  </Typography>
+                  <Typography variant="body2">
+                    <strong>Data:</strong> Marzo 2024
+                  </Typography>
+                  <Typography variant="body2">
+                    <strong>Status:</strong> Completato
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Typography>
+        </Box>
+
+        {/* Sezione Immagini */}
+        <Box
+          sx={{
+            width: "50%",
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={AppImage1}
+            alt="Project Screenshot 1"
+            style={{ width: "80%", borderRadius: 8 }}
+          />
+          <img
+            src={AppImage2}
+            alt="Project Screenshot 2"
+            style={{ width: "80%", borderRadius: 8 }}
+          />
         </Box>
       </Box>
     </ThemeProvider>
