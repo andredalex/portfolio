@@ -159,7 +159,7 @@ const ProjectDetail = () => {
             sx={{
               fontSize: "1.1rem",
               lineHeight: 1.8,
-              color: "secondary.main",
+              color: "text.secondary",
               textAlign: { xs: "center", md: "left" },
             }}
           >
