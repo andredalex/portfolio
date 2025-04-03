@@ -10,7 +10,6 @@ import {
   CssBaseline,
   Skeleton,
   Grow,
-  Fade,
   Divider,
 } from "@mui/material";
 import { keyframes } from "@emotion/react";
@@ -18,8 +17,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import CodeIcon from "@mui/icons-material/Code";
 import NavbarProject from "./NavbarProject";
-import AppImage1 from "../assets/immagine1.jpg";
-import AppImage2 from "../assets/immagine2.jpg";
+import HomeScreenEcommerce from "../assets/homeecommerce.png";
+import SchemaRelazionale from "../assets/schemarelazionale.png";
+import Home from "../assets/home.jpg";
+import Statistics from "../assets/statistics.jpg";
 
 const gradientAnimation = keyframes`
   0% { background-position: 0% 50% }
@@ -29,10 +30,10 @@ const gradientAnimation = keyframes`
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
-    background: { default: '#121212' },
-    primary: { main: '#2196F3' },
-    text: { primary: '#FFFFFF', secondary: '#B0B0B0' }
+    mode: "dark",
+    background: { default: "#121212" },
+    primary: { main: "#2196F3" },
+    text: { primary: "#FFFFFF", secondary: "#B0B0B0" },
   },
   typography: { fontFamily: '"Quicksand", sans-serif' },
 });
@@ -48,21 +49,28 @@ const ProjectDetail = () => {
       id: 1,
       title: "App E-commerce",
       description:
-        "App e-commerce completa con React e Node.js. Integrazione con sistemi di pagamento, gestione del carrello e profili utente personalizzati.",
-      image: "/assets/ecommerce-app.jpg",
-      technologies: ["HTML", "CSS", "Python", "PostgreSQL", "SQLAlchemy"],
-      githubUrl: "https://github.com/username/project1",
-      liveUrl: "https://project1.example.com",
+        "Il mio sito di e-commerce si occupa della vendita e gestione di prodotti d’abbigliamento, si avvicina molto come idea a subito.it",
+      function1: "Si può accedere in sola visualizzazione, quindi abbiamo la possibilità di scorrere i prodotti e visualizzarli ma non interagire con essi.",
+      function2: "Interazione e modifica: A questa modalità è possibile accedere solo dopo aver effettuato una registrazione iniziale oppure in seguito ad un login se abbiamo già creato l’account precedentemente",
+      function3: "Per poter acquistare un prodotto è necessario prima inserirlo nel carrello, fatto ciò si va nella pagina apposita del carrello dove è possibile effettuare l’ordine di tutti i prodotti. Nel nostro sito è presente una pagina per visualizzare lo storico degli ordini dal più al meno recente, qui sarà possibile aggiungere una recensione sul prodotto che poi sarà visualizzata con tutte quelle degli altri utenti. Nel caso l’utente registrato fosse anche un venditore, oltre a tutte queste funzionalità appena elencate, gli sarà possibile accedere alla sezione vendite in cui troviamo una pagina per aggiungere un prodotto, una pagina in cui vedere un sommario di tutta la merce messa in vendita e la merce acquistata fino a quel momento da altri utenti.",
+      technologies: ["HTML", "CSS", "Python", "PostgreSQL", "SQLAlchemy", "Javascript"],
+      stack: "Full-stack",
+      data:" maggio 2024",
+      status: "Completato",
     },
     {
       id: 2,
-      title: "Dashboard Analytics",
+      title: "Ecodriving",
       description:
-        "Dashboard interattiva per analytics. Visualizzazioni di dati complessi con grafici interattivi e filtri personalizzabili.",
-      image: "/assets/analytics-dashboard.jpg",
-      technologies: ["React", "D3.js", "Firebase", "Material-UI", "Redux"],
-      githubUrl: "https://github.com/username/project2",
-      liveUrl: "https://project2.example.com",
+        "Applicazione android pensata per guidatori responsabili legati a temi importanti come inquinamento ambientale e risparmio",
+        function1: "L’applicazione permette di calcolare in tempo reale i km percorsi e la velocità di percorrenza, proprio come google maps.",
+      function2: "Inoltre, l’applicazione fornisce informazioni dettagliate sul consumo di carburante e sulle emissioni di CO2 del veicolo, aiutando gli utenti a prendere decisioni più sostenibili durante la guida.",
+      function3: "L’applicazione include anche funzionalità di monitoraggio delle abitudini di guida, consentendo agli utenti di visualizzare statistiche e suggerimenti per migliorare la propria efficienza energetica.",
+      technologies: ["Android libraries", "Java", "XML", "Node.js", "PostgresSQL"],
+      image1:"{Home}",
+      stack: "Full-stack",
+      data:" gennaio 2025",
+      status: "Completato",
     },
   ];
 
@@ -103,23 +111,25 @@ const ProjectDetail = () => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: { xs: "column", md: "row" },
           justifyContent: "space-between",
           alignItems: "center",
-          width: "100vw",
-          height: "calc(100vh - 64px)",
-          padding: 4,
+          width: "100%",
+          height: "auto",
+          paddingTop: 10,
           backgroundColor: "default",
           marginTop: "64px",
           overflowX: "hidden",
+          px: { xs: 3, md: 10 },
         }}
       >
         {/* Sezione Testo */}
-        <Box sx={{ width: "50%", color: "white" }}>
+        <Box sx={{ width: { xs: "100%", md: "50%" }, color: "white" }}>
           <Typography
             variant="h4"
             sx={{
               mb: 3,
+              textAlign: { xs: "center", md: "left" },
               background: "linear-gradient(-45deg, #64FFDA, #2196F3)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -135,7 +145,7 @@ const ProjectDetail = () => {
               flexWrap: "wrap",
               gap: 1.5,
               mb: 4,
-              justifyContent: "left",
+              justifyContent: { xs: "center", md: "left" },
             }}
           >
             {project.technologies.map((tech, index) => (
@@ -165,12 +175,61 @@ const ProjectDetail = () => {
           >
             {project.description}
             <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }} />
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <CodeIcon sx={{ fontSize: 40, color: "primary.main" }} />
-              <Typography variant="body2" sx={{ fontStyle: "italic", color: "text.secondary" }}>
-                Principali funzionalità: Integrazione API, Design responsive,
-                Autenticazione JWT, Database relazionale
-              </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <CodeIcon sx={{ fontSize: 40, color: "primary.main" }} />
+                <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontStyle: "italic",
+                      color: "text.secondary",
+                      paddingLeft: 1,
+                    }}
+                  >
+                    {project.function1}
+                  </Typography>
+                  <Divider
+                    sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }}
+                  />
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontStyle: "italic",
+                      color: "text.secondary",
+                      paddingLeft: 1,
+                    }}
+                  >
+                    {project.function2}
+                  </Typography>
+                  <Divider
+                    sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }}
+                  />
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontStyle: "italic",
+                      color: "text.secondary",
+                      paddingLeft: 1,
+                    }}
+                  >
+                    {project.function3}
+                  </Typography>
+                </Box>
+              </Box>
               <Box
                 sx={{
                   bgcolor: "rgba(17, 34, 51, 0.3)",
@@ -190,13 +249,13 @@ const ProjectDetail = () => {
                   sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
                 >
                   <Typography variant="body2">
-                    <strong>Stack:</strong> Full-stack
+                    <strong>Stack:</strong>{project.stack}
                   </Typography>
                   <Typography variant="body2">
-                    <strong>Data:</strong> Marzo 2024
+                    <strong>Data:</strong> {project.data}
                   </Typography>
                   <Typography variant="body2">
-                    <strong>Status:</strong> Completato
+                    <strong>Status:</strong> {project.status}
                   </Typography>
                 </Box>
               </Box>
@@ -207,20 +266,22 @@ const ProjectDetail = () => {
         {/* Sezione Immagini */}
         <Box
           sx={{
-            width: "50%",
+            width: { xs: "100%", md: "50%" },
             display: "flex",
             flexDirection: "column",
             gap: 2,
             alignItems: "center",
+            paddingTop: 5,
+            paddingBottom: 5,
           }}
         >
           <img
-            src={AppImage1}
+            src={project.id === 1 ? HomeScreenEcommerce : Home}
             alt="Project Screenshot 1"
             style={{ width: "80%", borderRadius: 8 }}
           />
           <img
-            src={AppImage2}
+            src={project.id === 1 ? SchemaRelazionale : Statistics}
             alt="Project Screenshot 2"
             style={{ width: "80%", borderRadius: 8 }}
           />

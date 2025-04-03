@@ -37,7 +37,8 @@ const Presentation = () => {
               alignItems: 'center', 
               justifyContent: 'center', 
               gap: 4, 
-              textAlign: { xs: 'center', md: 'left' } 
+              textAlign: { xs: 'center', md: 'left' },
+              paddingTop: 10, 
             }}
           >
             {/* Immagine del profilo */}
