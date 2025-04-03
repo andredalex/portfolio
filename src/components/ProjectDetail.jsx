@@ -19,8 +19,8 @@ import CodeIcon from "@mui/icons-material/Code";
 import NavbarProject from "./NavbarProject";
 import HomeScreenEcommerce from "../assets/homeecommerce.png";
 import SchemaRelazionale from "../assets/schemarelazionale.png";
-import Home from "../assets/home.jpg";
-import Statistics from "../assets/statistics.jpg";
+import Home from "../assets/home.png";
+import Statistics from "../assets/statistics.png";
 
 const gradientAnimation = keyframes`
   0% { background-position: 0% 50% }
@@ -186,7 +186,7 @@ const ProjectDetail = () => {
               <Box
                 sx={{
                   display: "flex",
-                  flexDirection: "row",
+                  flexDirection: { xs: "column", md: "row" },
                   alignItems: "center",
                 }}
               >
@@ -278,12 +278,12 @@ const ProjectDetail = () => {
           <img
             src={project.id === 1 ? HomeScreenEcommerce : Home}
             alt="Project Screenshot 1"
-            style={{ width: "80%", borderRadius: 8 }}
+            style={{ width: "80%", maxWidth: "600px", borderRadius: 8 }}
           />
           <img
             src={project.id === 1 ? SchemaRelazionale : Statistics}
             alt="Project Screenshot 2"
-            style={{ width: "80%", borderRadius: 8 }}
+            style={{ width: "80%", maxWidth: "600px", borderRadius: 8 }}
           />
         </Box>
       </Box>
