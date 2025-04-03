@@ -3,7 +3,7 @@ import { Box, Typography, Container, createTheme, ThemeProvider, CssBaseline } f
 import ProgettiSection from './Projects';
 import ContactSection from './Contact';
 import Navbar from './Navbar';
-import profileImage from '../assets/profile.jpg';
+import profileImage from '../assets/0823faa49a42e36264da6ca7011625af.jpg';
 
 // Creazione del tema personalizzato
 const theme = createTheme({
