@@ -287,7 +287,7 @@ const ContattoSection = forwardRef((props, ref) => {
                         borderRadius: "50%",
                         backgroundColor: "#2196F3",
                         top: "20%",
-                        right: "20%",
+                        right: "10%",
                       }}
                     />
                     <Box
@@ -298,7 +298,7 @@ const ContattoSection = forwardRef((props, ref) => {
                         borderRadius: "50%",
                         backgroundColor: "#2196F3",
                         bottom: "30%",
-                        left: "25%",
+                        left: "10%",
                       }}
                     />
                   </Box>
