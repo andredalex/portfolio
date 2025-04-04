@@ -14,50 +14,71 @@ import {
   Alert,
   InputAdornment,
   Fade,
+  IconButton,
 } from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
 import MessageIcon from "@mui/icons-material/Message";
-import SendIcon from "@mui/icons-material/Send";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     background: {
-      default: "#121212",
-      paper: "#1E1E1E",
+      default: "#ff7e8b",
+      paper: "#FFFFFF",
     },
     primary: {
-      main: "#2196F3",
+      main: "#FF8C69", // Coral color for buttons
     },
     text: {
-      primary: "#FFFFFF",
-      secondary: "#B0B0B0",
+      primary: "#5F5F5F",
+      secondary: "#8D8D8D",
     },
   },
   typography: {
     fontFamily: '"Quicksand", sans-serif',
+    h3: {
+      fontWeight: 600,
+      color: "#4A4A4A",
+    },
   },
   components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          overflowX: "hidden",
-        },
-      },
-    },
     MuiTextField: {
       styleOverrides: {
         root: {
+          backgroundColor: "#F5F5F5",
+          borderRadius: 12,
           "& .MuiOutlinedInput-root": {
+            borderRadius: 12,
             "&:hover fieldset": {
-              borderColor: "#2196F3",
-              borderWidth: "2px",
+              borderColor: "#FF8C69",
             },
             "&.Mui-focused fieldset": {
-              borderColor: "#2196F3",
+              borderColor: "#FF8C69",
             },
           },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 25,
+          padding: "12px 24px",
+          textTransform: "none",
+          fontWeight: 600,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 20,
         },
       },
     },
@@ -102,7 +123,7 @@ const ContattoSection = forwardRef((props, ref) => {
           setLoading(false);
           setSnackbar({
             open: true,
-            message: "Messaggio inviato con successo!",
+            message: "Message sent successfully!",
             severity: "success",
           });
           setFormData({
@@ -117,7 +138,7 @@ const ContattoSection = forwardRef((props, ref) => {
           setSnackbar({
             open: true,
             message:
-              "C'è stato un errore nell'invio del messaggio. Riprova più tardi.",
+              "There was an error sending your message. Please try again later.",
             severity: "error",
           });
         }
@@ -133,46 +154,15 @@ const ContattoSection = forwardRef((props, ref) => {
       <Box
         ref={ref}
         sx={{
-          backgroundColor: theme.main,
-          py: 10,
-          color: theme.palette.text.primary,
+          background: "linear-gradient(135deg, #FF758C 0%, #FF7E5F 100%)",
           minHeight: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          position: "relative",
-          overflow: "hidden",
+          padding: 4,
         }}
       >
         <Container maxWidth="md">
-          <Typography
-            variant="h3"
-            align="center"
-            gutterBottom
-            sx={{
-              fontWeight: "bold",
-              color: "#2196F3",
-              mb: 2,
-              textShadow: "0px 2px 4px rgba(0,0,0,0.3)",
-            }}
-          >
-            Contattami
-          </Typography>
-
-          <Typography
-            variant="h6"
-            align="center"
-            sx={{
-              color: "#B0B0B0",
-              mb: 6,
-              maxWidth: "600px",
-              mx: "auto",
-            }}
-          >
-            Hai un progetto in mente o vuoi semplicemente fare due chiacchiere?
-            Scrivimi!
-          </Typography>
-
           <Fade in={true} timeout={1000}>
             <Paper
               elevation={3}
@@ -191,13 +181,24 @@ const ContattoSection = forwardRef((props, ref) => {
                 <Box
                   sx={{
                     flex: { xs: "1", md: "1" },
-                    backgroundColor: theme.main,
+                    backgroundColor: "#FFF",
                     display: "flex",
                     flexDirection: "column",
                     position: "relative",
                     padding: 4,
                   }}
                 >
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      top: 15,
+                      left: 15,
+                      color: "#5F5F5F",
+                    }}
+                  >
+                    <ArrowBackIcon />
+                  </IconButton>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -213,71 +214,21 @@ const ContattoSection = forwardRef((props, ref) => {
                         width: 150,
                         height: 150,
                         borderRadius: "50%",
-                        backgroundColor: "#2196F3",
+                        backgroundColor: "#FFE0E5",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                       }}
                     >
                       {/* We could replace this with an actual SVG of paper airplane */}
-                      {/* Sostituisci il placeholder con l'SVG dell'aeroplano */}
                       <Box
-                        sx={{
-                          width: 150,
-                          height: 150,
-                          borderRadius: "50%",
-                          backgroundColor: "#2196F3",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 100 100"
-                          width="80"
-                        >
-                          <g transform="rotate(30, 50, 50)">
-                            
-                            <path
-                              d="M 10,50 L 50,30 L 90,50 L 50,40 Z"
-                              fill="#FFC0CB"
-                              stroke="#0A3D62"
-                              stroke-width="1.5"
-                            />
-                            <path
-                              d="M 10,50 L 50,40 L 50,70"
-                              fill="#FFD1DC"
-                              stroke="#0A3D62"
-                              stroke-width="1.5"
-                            />
-                            <path
-                              d="M 50,40 L 90,50 L 50,60"
-                              fill="#FF9AA2"
-                              stroke="#0A3D62"
-                              stroke-width="1.5"
-                            />
-                            <line
-                              x1="50"
-                              y1="30"
-                              x2="50"
-                              y2="70"
-                              stroke="#0A3D62"
-                              stroke-width="0.5"
-                              stroke-dasharray="2,2"
-                            />
-                            <line
-                              x1="30"
-                              y1="45"
-                              x2="50"
-                              y2="40"
-                              stroke="#0A3D62"
-                              stroke-width="0.5"
-                            />
-                          </g>
-                        </svg>
-                      </Box>
+                        component="img"
+                        src="/api/placeholder/100/100"
+                        alt="Paper airplane"
+                        sx={{ width: 80, opacity: 0 }}
+                      />
                     </Box>
+
                     {/* Small pink circles background decoration */}
                     <Box
                       sx={{
@@ -285,7 +236,7 @@ const ContattoSection = forwardRef((props, ref) => {
                         width: 30,
                         height: 30,
                         borderRadius: "50%",
-                        backgroundColor: "#2196F3",
+                        backgroundColor: "#FFE0E5",
                         top: "20%",
                         right: "20%",
                       }}
@@ -296,7 +247,7 @@ const ContattoSection = forwardRef((props, ref) => {
                         width: 20,
                         height: 20,
                         borderRadius: "50%",
-                        backgroundColor: "#2196F3",
+                        backgroundColor: "#FFE0E5",
                         bottom: "30%",
                         left: "25%",
                       }}
@@ -304,21 +255,34 @@ const ContattoSection = forwardRef((props, ref) => {
                   </Box>
                 </Box>
 
-                {/* Form Section */}
+                {/* Right side - Form */}
                 <Box
                   sx={{
                     flex: { xs: "1", md: "1.5" },
-                    backgroundColor: theme.main,
+                    backgroundColor: "#FFF",
                     padding: 4,
                   }}
                 >
+                  <Typography
+                    variant="h4"
+                    gutterBottom
+                    sx={{
+                      fontWeight: 600,
+                      color: "#4A4A4A",
+                      mb: 3,
+                      textAlign: "center",
+                    }}
+                  >
+                    Contact us
+                  </Typography>
+
                   <Box
                     component="form"
                     onSubmit={handleSubmit}
-                    sx={{ display: "flex", flexDirection: "column", gap: 4 }}
+                    sx={{ display: "flex", flexDirection: "column", gap: 2 }}
                   >
                     <TextField
-                      label="Nome"
+                      placeholder="Full name"
                       variant="outlined"
                       fullWidth
                       name="nome"
@@ -335,7 +299,7 @@ const ContattoSection = forwardRef((props, ref) => {
                     />
 
                     <TextField
-                      label="Email"
+                      placeholder="Email adress"
                       variant="outlined"
                       fullWidth
                       name="email"
@@ -353,25 +317,15 @@ const ContattoSection = forwardRef((props, ref) => {
                     />
 
                     <TextField
-                      label="Messaggio"
+                      placeholder="Message..."
                       variant="outlined"
                       fullWidth
                       name="messaggio"
                       value={formData.messaggio}
                       onChange={handleChange}
                       multiline
-                      rows={5}
+                      rows={4}
                       required
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            position="start"
-                            sx={{ alignSelf: "flex-start", mt: 1.5 }}
-                          >
-                            <MessageIcon color="action" />
-                          </InputAdornment>
-                        ),
-                      }}
                     />
 
                     <Button
@@ -379,16 +333,61 @@ const ContattoSection = forwardRef((props, ref) => {
                       variant="contained"
                       color="primary"
                       disabled={loading}
+                      sx={{ mt: 2 }}
                       endIcon={
                         loading ? (
                           <CircularProgress size={20} color="inherit" />
                         ) : (
-                          <SendIcon />
+                          <ArrowForwardIcon />
                         )
                       }
                     >
-                      {loading ? "Inviando..." : "Invia Messaggio"}
+                      {loading ? "Submitting..." : "Submit"}
                     </Button>
+
+                    {/* Social Media Icons */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: 2,
+                        mt: 3,
+                      }}
+                    >
+                      <IconButton
+                        sx={{
+                          backgroundColor: "#4267B2",
+                          color: "white",
+                          "&:hover": { backgroundColor: "#365899" },
+                          width: 40,
+                          height: 40,
+                        }}
+                      >
+                        <FacebookIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton
+                        sx={{
+                          backgroundColor: "#1DA1F2",
+                          color: "white",
+                          "&:hover": { backgroundColor: "#1A91DA" },
+                          width: 40,
+                          height: 40,
+                        }}
+                      >
+                        <TwitterIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton
+                        sx={{
+                          backgroundColor: "#0077B5",
+                          color: "white",
+                          "&:hover": { backgroundColor: "#006097" },
+                          width: 40,
+                          height: 40,
+                        }}
+                      >
+                        <InstagramIcon fontSize="small" />
+                      </IconButton>
+                    </Box>
                   </Box>
                 </Box>
               </Box>
